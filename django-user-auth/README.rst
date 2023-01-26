@@ -1,5 +1,5 @@
 =====
-user_auth
+User Authentication
 =====
 
 user_auth is a Django app to conduct web-based user authentication. 
@@ -30,46 +30,56 @@ Quick start
     ]
 
 2. Add the following to your settings file to use it
-	AUTH_USER_MODEL = 'user_auth.MyUser'
 
-	AUTHENTICATION_BACKENDS = [
-		'django.contrib.auth.backends.ModelBackend',
-		'user_auth.backends.MyUserBackend',
-	]
+    AUTH_USER_MODEL = 'user_auth.MyUser'
 
-3. Setup the project to find static and media files by adding the following lines to your settings.py
-	Remember to import os ::
+    AUTHENTICATION_BACKENDS = [
+	'django.contrib.auth.backends.ModelBackend',
+	'user_auth.backends.MyUserBackend',
+    ]
+
+3. Setup the project to find static and media files by adding the following lines to your settings.py. Remember to import os
+
 	STATIC_URL = 'static/'
+	
 	MEDIA_URL = 'media/'
+	
 	STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+	
 	MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-4. Add an email provider settings for password reset
-	# email settings may differ with providers so look it up
+4. Add an email provider settings for password reset. Email settings may differ with providers so look it up
 	
 	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+	
 	EMAIL_HOST = ''
+	
 	EMAIL_PORT = ''
+	
 	EMAIL_HOST_USER = ''
+	
 	EMAIL_HOST_PASSWORD = ''
+	
 	EMAIL_USE_TLS = True
 
-	OR Use django's console email backend for testing, add it as shown below . It displays the password reset email in the console::
+OR Use django's console email backend for testing, add it as shown below . It displays the password reset email in the console
+	
 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-2. Include the user_auth URLconf in your project urls.py like this::
+2. Include the user_auth URLconf in your project urls.py like this. Make sure to set up static and media files routing as shown below
 
-    
-
-	Make sure to set up static and media files routing as shown below::
 		from django.conf import settings
+		
 		from django.conf.urls.static import static
+		
 		urlpatterns = [
 			... ,
 			path('user_auth/', include('user_auth.urls')),
 			... ,
 		]
+		
 		urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+		
 		urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
