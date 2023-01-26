@@ -1,0 +1,51 @@
+{% extends "chat_home.html" %}
+{% load static %}
+{% block room %}
+<div class="content">
+	<div class="contact-profile">
+		<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+		<p>{{chat_name}}</p>
+		<div class="social-media">
+			<i class="fa fa-facebook" aria-hidden="true"></i>
+			<i class="fa fa-twitter" aria-hidden="true"></i>
+			<i class="fa fa-instagram" aria-hidden="true"></i>
+		</div>
+	</div>
+	{{ room_name|json_script:"room-name" }}
+	{{ user.email|json_script:"user-email" }}
+
+	{% if messages %}
+	<div class="messages">
+		<ul>
+
+			{% for message in messages %}
+
+			{% if message.sender == user %}
+			<li class="sent">
+				<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+				<p>{{message.content}}
+				</p>
+			</li>
+			{% else %}
+			<li class="replies">
+				<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+				<p>{{message.content}}</p>
+			</li>
+			{% endif %}
+
+			{% endfor %}
+		</ul>
+	</div>
+	{% else %}
+	{% endif %}
+
+	<div class="message-input">
+		<div class="wrap">
+			<input type="text" placeholder="Write your message..." />
+			<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+			<button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+		</div>
+	</div>
+</div>
+
+{% endblock room %}

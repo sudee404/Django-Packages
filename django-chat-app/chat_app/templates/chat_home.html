@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html class=''>
+{% load static %}
+
+<head>
+	<meta charset='UTF-8'>
+	<meta name="Chat App" content="Live chatting application built in django">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS v5.2.1 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+	<script src="https://use.typekit.net/hoy3lrg.js"></script>
+	<script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+	<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+	<link rel='stylesheet prefetch'
+		href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+	<link rel="stylesheet" href="{% static 'css/chat_styles.css' %}">
+</head>
+
+<body>
+
+	<div id="frame">
+		<div id="sidepanel">
+			<div id="profile">
+				<div class="wrap">
+					<img id="profile-img" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+					<p>{{user.username}}</p>
+					<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+					<div id="status-options">
+						<ul>
+							<li id="status-online" class="active"><span class="status-circle"></span>
+								<p>Online</p>
+							</li>
+							<li id="status-away"><span class="status-circle"></span>
+								<p>Away</p>
+							</li>
+							<li id="status-busy"><span class="status-circle"></span>
+								<p>Busy</p>
+							</li>
+							<li id="status-offline"><span class="status-circle"></span>
+								<p>Offline</p>
+							</li>
+						</ul>
+					</div>
+					<div id="expanded">
+						<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+						<input name="twitter" type="text" value="mikeross" />
+						<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+						<input name="twitter" type="text" value="ross81" />
+						<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+						<input name="twitter" type="text" value="mike.ross" />
+					</div>
+				</div>
+			</div>
+			<div id="search">
+				<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+				<input type="text" placeholder="Search contacts..." />
+			</div>
+			<div id="contacts">
+				<ul>
+					{% if users %}
+					  
+					  {% for userz in users %}
+						<li class="contact" data-room="{% url 'get-room' pk1=userz.pk %}">
+							<div class="wrap">
+								<span class="contact-status online"></span>
+								<img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
+								<div class="meta">
+									<p class="name">{{userz}}</p>
+									<p class="preview text-success">Online</p>
+								</div>
+							</div>
+						</li>
+					  {% endfor %}
+						
+					{% endif %}
+
+				</ul>
+			</div>
+			<div id="bottom-bar">
+				<button id="addcontact" data-bs-toggle="modal" data-bs-target="#chatModal"><i
+						class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Start Conversation</span></button>
+				<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
+			</div>
+
+			<!-- Modal Body -->
+			<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+			<div class="modal fade" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+					<div class="modal-content">
+
+						<div class="modal-body">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{% block room %}
+		<div style="display:flex;margin-top:40vh;;justify-content:center;">
+			<h3>
+				Please select a conversation on the sidebar
+			</h3>
+
+		</div>
+		{% endblock room %}
+
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+		integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+		</script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+		integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+		</script>
+	<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+	<script src="{% static 'js/chat_main.js' %}"></script>
+	
+</body>
+
+</html>

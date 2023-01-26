@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="" />
+	<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+	<meta name="generator" content="Hugo 0.72.0" />
+	<title>Account</title>
+
+	<link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/carousel/" />
+
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+		integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" />
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+		integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<!-- Custom styles for this template -->
+	<link href="{% static 'css/user_style.css' %}" rel="stylesheet" />
+
+</head>
+
+<body>
+	<main>
+		{% if user.is_authenticated %}
+		<div id="login-check" data-authenticated='true'></div>
+		<div id="home-url" data-url="{% url 'index' %}"></div>
+
+		{% endif %}
+		<div class="section">
+			<div class="container">
+				<div class="row full-height justify-content-center">
+					<div class="col-12 text-center align-self-center py-5">
+						<div class="section pb-5 pt-5 pt-sm-2 text-center">
+							{% block main %}
+							<h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+							<input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
+							<label for="reg-log"></label>
+							<div class="card-3d-wrap mx-auto mb-4">
+								<div class="card-3d-wrapper">
+									{% include "login.html" %}
+									{% include "register.html" %}
+								</div>
+							</div>
+							{% endblock main %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<!--Jquery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+		integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-toast-plugin@1.3.2/dist/jquery.toast.min.css" />
+	<script src="https://cdn.jsdelivr.net/npm/jquery-toast-plugin@1.3.2/dist/jquery.toast.min.js"></script>
+	<script src="{% static 'js/user_main.js' %}"></script>
+</body>
+
+</html>
