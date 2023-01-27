@@ -12,7 +12,7 @@ Detailed documentation is in the "docs" directory.
 
 Installation
 -----------
-To install the package and use it in your project run the command below in your project environment.
+To install the package and use it in your project run the command below in your project environment.::
 
 `python3 -m pip install /path/to_file/django-user-auth-0.1.tar.gz`
 
@@ -29,7 +29,7 @@ Quick start
         'user_auth',
     ]
 
-2. Add the following to your settings file to use it
+2. Add the following to your settings file to use it::
 
     AUTH_USER_MODEL = 'user_auth.MyUser'
 
@@ -38,49 +38,37 @@ Quick start
 	'user_auth.backends.MyUserBackend',
     ]
 
-3. Setup the project to find static and media files by adding the following lines to your settings.py. Remember to import os
+3. Setup the project to find static and media files by adding the following lines to your settings.py. Remember to import os::
 
 	STATIC_URL = 'static/'
-	
 	MEDIA_URL = 'media/'
-	
 	STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
-	
 	MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-4. Add an email provider settings for password reset. Email settings may differ with providers so look it up
+4. Add an email provider settings for password reset. Email settings may differ with providers so look it up::
 	
 	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-	
 	EMAIL_HOST = ''
-	
 	EMAIL_PORT = ''
-	
 	EMAIL_HOST_USER = ''
-	
 	EMAIL_HOST_PASSWORD = ''
-	
 	EMAIL_USE_TLS = True
 
-OR Use django's console email backend for testing, add it as shown below . It displays the password reset email in the console
+OR Use django's console email backend for testing, add it as shown below . It displays the password reset email in the console::
 	
 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-2. Include the user_auth URLconf in your project urls.py like this. Make sure to set up static and media files routing as shown below
+2. Include the user_auth URLconf in your project urls.py like this. Make sure to set up static and media files routing as shown below::
 
-		from django.conf import settings
-		
-		from django.conf.urls.static import static
-		
-		urlpatterns = [
-			... ,
-			path('user_auth/', include('user_auth.urls')),
-			... ,
-		]
-		
-		urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-		
-		urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+	from django.conf import settings
+	from django.conf.urls.static import static
+	urlpatterns = [
+		... ,
+		path('user_auth/', include('user_auth.urls')),
+		... ,
+	]
+	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)	
+	urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 3. Run ``python manage.py migrate`` to create the user_auth models.
